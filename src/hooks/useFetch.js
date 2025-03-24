@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 /**
  * 
  * @param {String} url 
+ * @returns {Array}
  * 
  * This custom hook is used to separate the fetch logic from the component
  * 
@@ -16,7 +17,7 @@ const useFetch = (url) => {
         fetch(url)
             .then(response => response.json())
             .then(data => setCountries(data))
-            .then(error => console.log(error))
+            .catch(error => console.log(error.message))
     }, [url])
 
     return [countries]
