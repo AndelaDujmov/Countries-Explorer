@@ -1,4 +1,3 @@
-
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -6,6 +5,10 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import SearchBar from './SearchBar/SearchBar';
 import { useState } from 'react';
+
+// This is the NavigationBar component that is displayed at the top of the page
+// It contains the title of the page and the search bar component
+// The search bar component is used to search for country names
 
 export default function NavigationBar() {
   const [searchData, setSearchData] = useState("")

@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// This component is used to display a 404 - Page Not Found error page
+// It contains a message and a link to the home page
+
 const NotFound = () => {
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-gray-100 w-full">

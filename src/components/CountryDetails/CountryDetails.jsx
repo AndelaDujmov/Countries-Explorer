@@ -26,7 +26,7 @@ const CountryDetails = ({ country }) => {
                 </div>
                 <div className="details-container w-2/3 pl-4">
                     <h1 className="text-2xl font-bold">{country.name.official}</h1>
-                    <hr className="my-2 border-t-2 border-blue-300" /> {/* Decorative line */}
+                    <hr className="my-2 border-t-2 border-blue-300" /> 
                     <p><strong>Population:</strong> {country.population.toLocaleString()}</p>
                     <p><strong>Region:</strong> {country.region}</p>
                     <p><strong>Subregion:</strong> {country.subregion}</p>

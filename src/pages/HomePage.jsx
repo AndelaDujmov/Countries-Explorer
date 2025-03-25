@@ -4,37 +4,47 @@ import useFetch from "../hooks/useFetch";
 import Header from "../components/CountryList/Header/Header";
 import Filter from "../components/CountryList/Filter/Filter";
 
+// This is the main page of the application
+// It contains the filters and the country list
+// It also contains the logic for fetching data from the API
+// The data is fetched using the useFetch hook
+// The data is then passed to the CountryList component
+// The filters are passed to the Filter component
+// The Header component is used to display the column headers
+// The data is sorted and filtered based on the filter values
+
 const HomePage = () => {
-    const [data, setData] = useState([]);
-    const [continentFilter, setContinentFilter] = useState('All');
-    const [rangeFilter, setRangeFilter] = useState();
-    const [languageFilter, setLanguageFilter] = useState();
-    const [sortOrder, setSortOrder] = useState('asc');
-    const [sortBy, setSortBy] = useState('name');
+    const [url, setUrl] = useState('https://restcountries.com/v3.1/all')
+    const [data, error] = useFetch(url);
+    const [continentFilter, setContinentFilter] = useState('All')
+    const [rangeFilter, setRangeFilter] = useState('All')
+    const [languageFilter, setLanguageFilter] = useState('All')
+    const [sortOrder, setSortOrder] = useState('asc')
+    const [sortBy, setSortBy] = useState('name')
    
-    console.log(continentFilter)
 
     useEffect(() => {
-        const fetchCountries = async () => {
-            const url = continentFilter === 'All'
-                ? 'https://restcountries.com/v3.1/all'
-                : `https://restcountries.com/v3.1/region/${continentFilter}`;
-                
-            const response = await fetch(url);
-            const countries = await response.json();
-            setData(countries);
-        };
+        
+        setUrl(languageFilter === 'All'
+            ? 'https://restcountries.com/v3.1/all'
+            : `https://restcountries.com/v3.1/lang/${languageFilter}`)
+      
+    }, [languageFilter]);
 
-        fetchCountries();
-    }, [continentFilter]);
+    
 
     return (
         <div className='text-white'>
-            <Filter name={continentFilter} setName={setContinentFilter} />
+            <Filter name={continentFilter} setName={setContinentFilter} url={`https://restcountries.com/v3.1/all?fields=continents`} />
+           
+            <Filter name={languageFilter} setName={setLanguageFilter} url={`https://restcountries.com/v3.1/all?fields=languages`} />
+            
             <table className='w-full border-collapse border-separate border-spacing-y-4 mt-2'>
                 <Header sortOrder={sortOrder} setSortOrder={setSortOrder} sortBy={sortBy} setSortBy={setSortBy}/>
                 <tbody>
-                    <CountryList countries={data} sortBy={sortBy} sortOrder={sortOrder} />
+                    {
+                        error ? <tr><td colSpan='5' className='text-center'>{error}</td></tr> :  <CountryList countries={data} sortBy={sortBy} sortOrder={sortOrder} />
+                    }
                 </tbody>
             </table>
         </div>

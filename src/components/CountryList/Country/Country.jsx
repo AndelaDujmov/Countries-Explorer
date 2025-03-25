@@ -2,13 +2,10 @@ import { useState } from "react";
 import CountryPopover from "../Popover/Popover";
 import { Link } from "react-router-dom";
 
-/**
- * 
- * @param {Object} param0 
- * @returns 
- * 
- * This component represents an element in the country list. It also encapsulates the logic behind hovering and clicking on an item.
- */
+// This component is used to display a single country in the country list table
+// It contains the country name, flag, population, and continent
+// It also contains a popover with additional information about the country
+// The popover is displayed when the user hovers over the card
 
 const Country = ({ country }) => {
     const [anchor, setAnchor] = useState(null);

@@ -1,10 +1,4 @@
-/**
- * 
- * @param {*} param0 
- * @returns 
- * 
- * Component that represents table header. Takes sort by and sort order parameters. Implements logic of
- */
+// This component is the header of the table, it contains the column names and the sort functionality
 
 const Header = ({ sortOrder, setSortOrder, sortBy, setSortBy }) => {
     const handleSort = (column) => {

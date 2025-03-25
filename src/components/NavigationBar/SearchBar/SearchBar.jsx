@@ -2,6 +2,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 
+// This is the SearchBar component that is displayed in the NavigationBar component at the top of the page
+// It contains a search icon and an input field for searching
+
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,

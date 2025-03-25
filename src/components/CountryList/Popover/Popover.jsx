@@ -1,8 +1,14 @@
 import { Popover, Typography } from "@mui/material";
 
+// This is the CountryPopover component that is displayed when a country is hovered over 
+
 const CountryPopover = ({ open, anchor, handlePopoverClose, country }) => {
-    const properties = Object.entries(country)
+    const properties = Object.entries(country);
     
+    const joinArrayOrFallback = (arr, fallback = "No data available") => {
+        if (!arr) return fallback;
+        return Array.isArray(arr) ? arr.join(", ") : arr;
+    };
 
     return(
         <Popover
@@ -11,47 +17,45 @@ const CountryPopover = ({ open, anchor, handlePopoverClose, country }) => {
             open={open}
             anchorEl={anchor}
             anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
+                vertical: 'bottom',
+                horizontal: 'left',
             }}
             transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
+                vertical: 'top',
+                horizontal: 'left',
             }}
             onClose={handlePopoverClose}
             disableRestoreFocus
-      >
-        <Typography sx={{ p: 5 }}>
-            {
+        >
+            <Typography sx={{ p: 3 }}>
                 <div>
                     <div>
-                        Currency: {country.currencies ?
-                                    Object.entries(country.currencies).map(([code, currencyInfo]) => (
-                                        `${currencyInfo.name} (${currencyInfo.symbol})` 
-                                    )):
-                                    "No currencies available"}
-        
-                    </div>
-                     <div>
-                        Capital: {country.capital && country.capital.length > 0 ?
-                                country.capital.join(', ') :
-                                "No capital available"}
+                        <strong>Currency: </strong>
+                        {country.currencies
+                            ? Object.entries(country.currencies).map(([code, currencyInfo]) =>
+                                `${currencyInfo.name} (${currencyInfo.symbol})`
+                            ).join(", ")
+                            : "No currencies available"}
                     </div>
                     <div>
-                        Language: {country.languages ?
-                                    Object.entries(country.languages).map(([language]) => (
-                                        `${country.languages[language]} `
-                                    )) : 
-                                    "No language available"}
+                        <strong>Capital: </strong>
+                        {joinArrayOrFallback(country.capital)}
                     </div>
                     <div>
-                        {country.independent ? "Independent" : "Not Independent"}
+                        <strong>Language: </strong>
+                        {country.languages
+                            ? Object.entries(country.languages).map(([language]) =>
+                                `${country.languages[language]} `
+                            ).join(", ")
+                            : "No languages available"}
+                    </div>
+                    <div>
+                        <strong>{country.independent ? "Independent" : "Not Independent"}</strong>
                     </div>
                 </div>
-            }
-        </Typography>
-      </Popover>
-    )
-}
+            </Typography>
+        </Popover>
+    );
+};
 
-export default CountryPopover
+export default CountryPopover;

@@ -4,16 +4,19 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import useFetch from "../../../hooks/useFetch";
+import processData from "../../../utils/processData";
 
-const Filter = ({ name, setName }) =>  {
-    const [continents] = useFetch(`https://restcountries.com/v3.1/all?fields=continents`);
-    const valueSet = new Set();
+// This is the Filter component that is used to filter the countries based on the continent, it receives the name and setName props and the url prop
+// The name prop is the current value of the filter
+// The setName prop is the function that updates the filter value
+// The url prop is the URL to fetch the data from
+// The data is fetched using the useFetch hook
+// The valueSet is the set of unique values for the filter
 
-    continents.forEach(el => {
-        el.continents.forEach(e => {
-            valueSet.add(e);
-        });
-    });
+const Filter = ({ name, setName, url }) =>  {
+    const [data] = useFetch(url);
+    const valueSet = processData(data);
+   
 
     const handleChange = (e) => {
         setName(e.target.value);
@@ -24,7 +27,7 @@ const Filter = ({ name, setName }) =>  {
             <FormControl fullWidth>
                 <InputLabel 
                     id="demo-simple-select-label" 
-                    sx={{ color: "white" }} // White text for label
+                    sx={{ color: "white" }} 
                 >
                     Continent
                 </InputLabel>
@@ -35,17 +38,17 @@ const Filter = ({ name, setName }) =>  {
                     label="Continent"
                     onChange={handleChange}
                     sx={{
-                        backgroundColor: "blue", // Blue background for Select
-                        color: "white", // White text for Select
+                        backgroundColor: "blue", 
+                        color: "white", 
                         '& .MuiSelect-icon': {
-                            color: 'white', // White color for the dropdown icon
+                            color: 'white', 
                         },
                         '& .MuiMenuItem-root': {
-                            backgroundColor: 'blue', // Blue background for menu items
-                            color: 'white', // White text for menu items
+                            backgroundColor: 'blue', 
+                            color: 'white', 
                         },
                         '& .MuiMenuItem-root:hover': {
-                            backgroundColor: 'darkblue', // Dark blue on hover
+                            backgroundColor: 'darkblue', 
                         },
                     }}
                 >
