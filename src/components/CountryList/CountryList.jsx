@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import Country from "./Country/Country"
 
 // This component will receive a list of countries and will render a list of Country components. 
@@ -7,9 +8,9 @@ import Country from "./Country/Country"
 // The sorted countries will be mapped to Country components and rendered on the page.
 // The Country component will receive the country data as a prop and will render the country details.
 
-const CountryList = ({ countries, sortOrder, sortBy }) => {
+const CountryList = ({ countries, setCountries, sortOrder, sortBy, continentFilter, rangeFilter }) => {
 
-    const sortedCountries = countries.sort((a, b) => {
+    let sortedCountries = countries.sort((a, b) => {
         if (sortBy === 'name') {
             return sortOrder === 'asc' ?
                 a.name.official.localeCompare(b.name.official) :
@@ -25,16 +26,21 @@ const CountryList = ({ countries, sortOrder, sortBy }) => {
         }
     })
 
+    const filteredCountries = continentFilter !== "All" ? sortedCountries.filter((country) => country.continents.includes(continentFilter))
+                                                        : sortedCountries;
+
+
+    
+    
 
     return (
         <>
-            {
-                sortedCountries.map((element, index) => (            
-                    <Country key={index} country={element}/>
-                ))
-            }
-        </>  
-    )
+            {filteredCountries.map((element, index) => (
+            <Country key={index} country={element} />
+            ))}
+        </>
+        ) 
+    
 }
 
 export default CountryList

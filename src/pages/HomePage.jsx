@@ -15,23 +15,26 @@ import Filter from "../components/CountryList/Filter/Filter";
 
 const HomePage = () => {
     const [url, setUrl] = useState('https://restcountries.com/v3.1/all')
-    const [data, error] = useFetch(url);
+    const [data, setData, error] = useFetch(url);
     const [continentFilter, setContinentFilter] = useState('All')
     const [rangeFilter, setRangeFilter] = useState('All')
     const [languageFilter, setLanguageFilter] = useState('All')
     const [sortOrder, setSortOrder] = useState('asc')
     const [sortBy, setSortBy] = useState('name')
    
+    console.log(data)
 
     useEffect(() => {
         
         setUrl(languageFilter === 'All'
             ? 'https://restcountries.com/v3.1/all'
             : `https://restcountries.com/v3.1/lang/${languageFilter}`)
+
+        console.log(continentFilter)
       
     }, [languageFilter]);
 
-    
+    console.log(continentFilter)
 
     return (
         <div className='text-white'>
@@ -43,7 +46,7 @@ const HomePage = () => {
                 <Header sortOrder={sortOrder} setSortOrder={setSortOrder} sortBy={sortBy} setSortBy={setSortBy}/>
                 <tbody>
                     {
-                        error ? <tr><td colSpan='5' className='text-center'>{error}</td></tr> :  <CountryList countries={data} sortBy={sortBy} sortOrder={sortOrder} />
+                        error ? <tr><td colSpan='5' className='text-center'>{error}</td></tr> :  <CountryList countries={data} setCountries={setData} sortBy={sortBy} sortOrder={sortOrder} continentFilter={continentFilter} rangeFilter={rangeFilter} />
                     }
                 </tbody>
             </table>

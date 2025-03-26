@@ -48,62 +48,62 @@ The application is built using **React.js** and leverages various modern React p
 
 This is an overview of the project's folder structure and the purpose of each folder/file.
 
-## `/src`
+### `/src`
 
 The `src` directory contains all the source code for the application, including components, hooks, and pages. This is where most of your code will reside.
 
 ---
 
-## `/components`
+### `/components`
 
 The `components` folder holds the reusable UI components used throughout the application. Components are typically small, isolated units of functionality that can be imported into other parts of your app.
 
-### `/CountryList`
+#### `/CountryList`
 
 This subfolder contains components related to the country list and interactions like sorting and displaying country details.
 
-- **`CountryList.js`**:  
+- ***`CountryList.js`***:  
   The main component responsible for displaying a list of countries. It handles rendering countries, sorting, and other related functionality.
 
-- **`Header.js`**:  
+- ***`Header.js`***:  
   The table header component, displaying column headers like "Name," "Population," "Capital," etc. It may also contain sorting controls.
 
-- **`Filter.js`**:  
+- ***`Filter.js`***:  
   A component that allows users to filter countries based on criteria such as continent or language. It interacts with the `HomePage` to filter the displayed countries.
 
-- **`CountryPopover.js`**:  
+- ***`CountryPopover.js`***:  
   A popover component that shows additional details about a country when hovered or clicked. It includes information like currency, capital, languages, and independence.
 
-### `/Header`
+##### `/Header`
 
 This folder contains components related to table headers and the display of column names.
 
-- **`Header.js`**:  
+- ***`Header.js`***:  
   A header component for the table, including column labels and the ability to sort by specific attributes like name, population, etc.
 
-### `/Filter`
+##### `/Filter`
 
 This folder contains filter-related components that manage how users filter the displayed data.
 
-- **`Filter.js`**:  
+- ***`Filter.js`***:  
   A generic filter component that enables users to filter the displayed countries based on selected values such as continent or language.
 
 ---
 
-## `/hooks`
+#### `/hooks`
 
 The `hooks` directory contains custom React hooks, which provide reusable logic to manage state and side effects in functional components.
 
-- **`useFetch.js`**:  
+- ***`useFetch.js`***:  
   A custom hook that abstracts the process of fetching data from the API. It handles the logic for making API calls and provides the fetched data, loading states, and error handling.
 
 ---
 
-## `/pages`
+#### `/pages`
 
 The `pages` directory contains components that represent full pages or views of the application. These components manage higher-level logic and typically contain multiple components for rendering the content.
 
-- **`HomePage.js`**:  
+- ***`HomePage.js`***:  
   The main page component of the application, which displays the country list and manages the state for filtering and sorting. It uses various components like `Filter`, `CountryList`, and `Header` to render the page's content.
 
 ---

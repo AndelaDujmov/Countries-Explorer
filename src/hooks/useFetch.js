@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 // If there is an error, the error message is set
 // If there is no error, the data is set
 // The data is returned as an array along with the error message
-// The URL is passed as an argument to the hook
 
 const useFetch = (url) => {
 
@@ -23,6 +22,7 @@ const useFetch = (url) => {
                 return response.json()
             })
             .then(data => {
+                console.log("Primljeno")
                 console.log(data)
                 setCountries(data)
                 setError(null)
@@ -33,7 +33,7 @@ const useFetch = (url) => {
             })
     }, [url])
 
-    return [countries, error]
+    return [countries, setCountries, error]
 }
 
 export default useFetch

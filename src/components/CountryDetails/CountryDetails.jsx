@@ -1,5 +1,13 @@
 import { useNavigate } from "react-router-dom";
 
+// This component is used to display the details of a specific country
+// It receives the country data as a prop and displays the country details
+// It also contains a button to navigate back to the main menu
+// The country details include the country name, flag, population, region, subregion, capital, languages, and currencies
+// The data is displayed in a two-column layout with the flag on the left and the details on the right
+// The languages and currencies are displayed as comma-separated lists
+// The component uses the useNavigate hook to navigate back to the main menu when the button is clicked
+
 const CountryDetails = ({ country }) => {
     const navigate = useNavigate();
 

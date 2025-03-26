@@ -10,14 +10,19 @@ import CountryDetails from "../components/CountryDetails/CountryDetails";
 
 const AboutPage = () => {
     const { code } = useParams();
-    const [data] = useFetch(`https://restcountries.com/v3.1/alpha/${code}`);
+    const [data, setData, error] = useFetch(`https://restcountries.com/v3.1/alpha/${code}`);
 
-    if (!data) {
+    if (!data || data.length === 0) {  
         return <div>Loading...</div>;
     }
 
+  
     return (
-        <CountryDetails country={data[0]} />
+       <>
+            {
+                error ? <div>{error}</div> : <CountryDetails country={data[0]} />
+            }
+       </>
     );
 };
 
