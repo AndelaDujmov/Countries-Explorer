@@ -1,15 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// This component is used to display a 400 - Bad Request error page
-// It contains a message and a link to the home page
-
 const BadRequest = () => {
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-gray-100 w-full">
-            <h1 className="text-5xl font-bold text-red-600">400 - Bad Request</h1>
-            <p className="mt-4 text-lg text-gray-700">Sorry, the page you are looking for does not exist.</p>
-            <Link to="/" className="mt-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200">
+        <div className="flex flex-col items-center justify-center h-screen px-6 w-full text-center">
+            <h1 className="text-3xl md:text-5xl font-bold text-red-400">400 - Bad Request</h1>
+            <p className="mt-4 text-base md:text-lg text-gray-700 max-w-md">
+                Sorry, your request was invalid or cannot be processed.
+            </p>
+            <Link 
+                to="/" 
+                className="mt-6 px-6 py-3 bg-blue-500 text-white rounded-lg text-sm md:text-base hover:bg-blue-600 transition duration-200"
+            >
                 Go to Home
             </Link>
         </div>

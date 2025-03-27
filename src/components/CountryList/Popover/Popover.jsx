@@ -1,6 +1,26 @@
 import { Popover, Typography } from "@mui/material";
 
-// This is the CountryPopover component that is displayed when a country is hovered over 
+/**
+ * CountryPopover Component
+ * 
+ * This component displays a popover with detailed information about a country when hovered over.
+ * It includes details such as currency, capital, language, and independence status.
+ * 
+ * @param {boolean} open - Controls whether the popover is open or closed.
+ * @param {HTMLElement} anchor - The anchor element for positioning the popover.
+ * @param {Function} handlePopoverClose - Function to close the popover.
+ * @param {Object} country - Country data object containing various details.
+ * 
+ * @returns {JSX.Element} - A popover component displaying country information.
+ * 
+ * @example
+ * <CountryPopover 
+ *   open={true} 
+ *   anchor={anchorEl} 
+ *   handlePopoverClose={closePopover} 
+ *   country={selectedCountry} 
+ * />
+ */
 
 const CountryPopover = ({ open, anchor, handlePopoverClose, country }) => {
     const properties = Object.entries(country);

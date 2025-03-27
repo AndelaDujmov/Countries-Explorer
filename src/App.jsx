@@ -5,20 +5,21 @@ import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
 import NotFound from './pages/ErrorPages/NotFound'
 import BadRequest from './pages/ErrorPages/BadRequest'
+import { useState } from 'react'
 
 function App() {
 
+  const [searchQuery, setSearchQuery] = useState('')
+
   return (
     <>
-      <NavigationBar />
-      <Router>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/country/:code' element={<AboutPage />} />
-          <Route path='/badRequest' element={<BadRequest />}/>
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-      </Router>
+      <NavigationBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <Routes>
+        <Route path='/' element={<HomePage searchQuery={searchQuery} />} />
+        <Route path='/country/:code' element={<AboutPage />} />
+        <Route path='/badRequest' element={<BadRequest />}/>
+        <Route path='*' element={<NotFound />} />
+      </Routes>
     </>
   )
 }

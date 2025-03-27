@@ -1,42 +1,70 @@
-import { useEffect } from "react"
 import Country from "./Country/Country"
+import populationRanges from "../../utils/populationRanges"
 
-// This component will receive a list of countries and will render a list of Country components. 
-// The countries will be sorted based on the sortOrder and sortBy properties.
-// The sortOrder property will determine whether the countries should be sorted in ascending or descending order.
-// The sortBy property will determine the property by which the countries should be sorted (name, population, or continent).
-// The sorted countries will be mapped to Country components and rendered on the page.
-// The Country component will receive the country data as a prop and will render the country details.
+/**
+ * CountryList Component
+ * 
+ * This component receives a list of countries and applies sorting and filtering
+ * based on user-selected criteria such as name, population, area, continent, and search queries.
+ * It then renders a list of `Country` components.
+ * 
+ * @param {Object[]} countries - Array of country objects.
+ * @param {string} sortOrder - Sorting order: "asc" for ascending, "desc" for descending.
+ * @param {string} sortBy - Property to sort by: "name", "population", or "area".
+ * @param {string} continentFilter - Selected continent for filtering ("All" for no filter).
+ * @param {string} rangeFilter - Selected population range label.
+ * @param {string} searchQuery - User's search input for filtering country names.
+ * 
+ * @returns {JSX.Element} - A list of `Country` components that match the applied filters.
+ * 
+ * @example
+ * <CountryList 
+ *   countries={data} 
+ *   sortOrder="asc" 
+ *   sortBy="name" 
+ *   continentFilter="Asia" 
+ *   rangeFilter="1M-10M" 
+ *   searchQuery="India" 
+ * />
+ */
 
-const CountryList = ({ countries, setCountries, sortOrder, sortBy, continentFilter, rangeFilter }) => {
+const CountryList = ({ countries, sortOrder, sortBy, continentFilter, rangeFilter, searchQuery }) => {
 
+    const rangeList = populationRanges[0]
+
+    // Sorting logic
     let sortedCountries = countries.sort((a, b) => {
         if (sortBy === 'name') {
             return sortOrder === 'asc' ?
                 a.name.official.localeCompare(b.name.official) :
                 b.name.official.localeCompare(a.name.official)
-        } else if (sortBy === 'population') {
+        } if (sortBy === 'population') {
             return sortOrder === 'asc' ?
                 a.population - b.population :
                 b.population - a.population
-        } else {
-            return sortOrder === 'asc' ?
-            a.continents[0].localeCompare(b.continents[0]) :
-            b.continents[0].localeCompare(a.continents[0])
         }
+          if (sortBy === 'area') {
+            return sortOrder === 'asc' ?
+                a.population - b.population :
+                b.population - a.population
+        } 
     })
 
-    const filteredCountries = continentFilter !== "All" ? sortedCountries.filter((country) => country.continents.includes(continentFilter))
-                                                        : sortedCountries;
-
-
+    // Filtering logic
+    const range = rangeList.find(el => el.label === rangeFilter) || rangeList[0]
+    console.log(range)
     
-    
+    const filteredCountries = sortedCountries
+        .filter(country => continentFilter === "All" || country.continents.includes(continentFilter))
+        .filter(country => country.population >= range.min && country.population <= range.max)
+        .filter(country => 
+            !searchQuery || country.name.official.toLowerCase().includes(searchQuery.toLowerCase())
+        );
 
     return (
         <>
             {filteredCountries.map((element, index) => (
-            <Country key={index} country={element} />
+                <Country key={index} country={element} />
             ))}
         </>
         ) 

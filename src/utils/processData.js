@@ -24,7 +24,7 @@ const processData = (data) => {
                 });
             }
         });
-    }
+    }  
     
     return valueSet;
 

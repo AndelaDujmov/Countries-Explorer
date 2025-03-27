@@ -3,34 +3,52 @@ import * as React from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import useFetch from "../../../hooks/useFetch";
-import processData from "../../../utils/processData";
 
-// This is the Filter component that is used to filter the countries based on the continent, it receives the name and setName props and the url prop
-// The name prop is the current value of the filter
-// The setName prop is the function that updates the filter value
-// The url prop is the URL to fetch the data from
-// The data is fetched using the useFetch hook
-// The valueSet is the set of unique values for the filter
+/**
+ * Filter Component
+ * 
+ * This component is a dropdown selector used to filter countries based on a specific criterion 
+ * (e.g., continent, population range).
+ * 
+ * @param {string} name - The current selected filter value.
+ * @param {Function} setName - Function to update the selected filter value.
+ * @param {Set<string>} valueSet - Set of unique values to display as filter options.
+ * @param {string} label - The label for the filter dropdown.
+ * @param {string} startValue - The default starting value for the dropdown (e.g., "All").
+ * 
+ * @returns {JSX.Element} - A styled dropdown select component.
+ * 
+ * @example
+ * <Filter 
+ *   name={continentFilter} 
+ *   setName={setContinentFilter} 
+ *   valueSet={new Set(["Africa", "Europe", "Asia"])} 
+ *   label="Continent" 
+ *   startValue="All"
+ * />
+ */
 
-const Filter = ({ name, setName, url }) =>  {
-    const [data] = useFetch(url);
-    const valueSet = processData(data);
-   
+const Filter = ({ name, setName, valueSet, label, startValue }) => {
 
     const handleChange = (e) => {
         setName(e.target.value);
     };
 
     return (
-        <Box sx={{ minWidth: 120 }}>
+        <Box sx={{
+            minWidth: 120, 
+            width: { xs: 20, sm: 160, md: 2000 }, 
+            height: { xs: 'auto', sm: 40, md: 50 },
+            marginBottom: 2,
+        }}>
             <FormControl fullWidth>
                 <InputLabel 
                     id="demo-simple-select-label" 
                     sx={{ color: "white" }} 
                 >
-                    Continent
+                    {label}
                 </InputLabel>
+
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -50,11 +68,14 @@ const Filter = ({ name, setName, url }) =>  {
                         '& .MuiMenuItem-root:hover': {
                             backgroundColor: 'darkblue', 
                         },
+                        height: { xs: 36, sm: 40, md: 50 }, 
+                        width: { xs: 88, sm: 140, md: 150 }
                     }}
                 >
-                    <MenuItem value={"All"}>
-                            All
+                    <MenuItem value={startValue}>
+                            {startValue}
                     </MenuItem>
+
                     {Array.from(valueSet).map(element => (
                         <MenuItem key={element} value={element}>
                             {element}

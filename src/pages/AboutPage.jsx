@@ -2,11 +2,17 @@ import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import CountryDetails from "../components/CountryDetails/CountryDetails";
 
-// This component is used to display the details of a specific country
-// It uses the useFetch hook to fetch the data for the specific country
-// The data is then passed to the CountryDetails component
-// The CountryDetails component displays the details of the country
-// The code parameter is extracted from the URL using the useParams hook
+/**
+ * AboutPage component displays the details of a specific country.
+ * 
+ * This component uses the `useParams` hook to extract the country code from the URL and fetches the country data using the `useFetch` hook.
+ * The fetched data is then passed to the `CountryDetails` component to display the details of the selected country.
+ * 
+ * @example
+ * return (
+ *   <AboutPage />
+ * );
+ */
 
 const AboutPage = () => {
     const { code } = useParams();
