@@ -1,3 +1,5 @@
+import { DateTime } from "luxon";
+
 const TextContainer = ({ country }) => {
     // If country is undefined, display a loading message
     if (!country) {
@@ -33,7 +35,16 @@ const TextContainer = ({ country }) => {
                     : "N/A"}
             </p>
             <p className="text-base sm:text-lg md:text-2xl">
+                <strong>Current Time:</strong> {country?.timezones 
+                    ? country.timezones.map(zone => 
+                        DateTime.now().setZone(zone).toFormat("dd.MM.yyyy HH:mm")).join(',')
+                    : "N/A"}
+            </p>
+            <p className="text-base sm:text-lg md:text-2xl">
                 <strong>Continent:</strong> {country?.continents ? country.continents.join(', ') : "N/A"}
+            </p>
+            <p className="text-base sm:text-lg md:text-2xl">
+                <strong>Start Of The Week:</strong> {country?.startOfWeek ? country.startOfWeek : "N/A"}
             </p>
         </div>
     );

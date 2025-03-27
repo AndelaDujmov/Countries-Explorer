@@ -38,8 +38,6 @@ const useFetch = (url) => {
                 return response.json()
             })
             .then(data => {
-                console.log("Primljeno")
-                console.log(data)
                 setCountries(data)
                 setError(null)
             })

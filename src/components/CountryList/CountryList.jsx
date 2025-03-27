@@ -52,7 +52,6 @@ const CountryList = ({ countries, sortOrder, sortBy, continentFilter, rangeFilte
 
     // Filtering logic
     const range = rangeList.find(el => el.label === rangeFilter) || rangeList[0]
-    console.log(range)
     
     const filteredCountries = sortedCountries
         .filter(country => continentFilter === "All" || country.continents.includes(continentFilter))
